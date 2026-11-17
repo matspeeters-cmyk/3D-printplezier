@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimakers - Uw 3D-geprinte spullen voor een lage prijs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(3px);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- 1. TOP ANNOUNCEMENT BAR -->
+    <div class="bg-[#08121a] text-slate-300 text-xs sm:text-sm border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-col items-center justify-center gap-2 text-center">
+            <div class="flex flex-wrap items-center justify-center gap-1.5">
+                <span>🚚 Verzending vanaf <strong class="text-white">€ 3,95</strong> (afhankelijk van grootte)</span>
+                <span class="hidden sm:inline text-slate-600">•</span>
+                <span><strong class="text-emerald-400 font-semibold">Eigen bezorging</strong> in IJmuiden, Driehuis, Velserbroek & Santpoort-Noord!</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-5 text-xs text-slate-300 pt-0.5">
+                <a href="https://whatsapp.com/channel" target="_blank" rel="noopener" class="hover:text-emerald-400 transition flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                    WhatsApp Kanaal
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener" class="hover:text-red-400 transition flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube Kanaal
+                </a>
+                <a href="mailto:minimakers3dprint@gmail.com" class="hover:text-emerald-400 transition flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    E-mail
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. HEADER -->
+    <header class="bg-[#0c1a24] text-white sticky top-0 z-30 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+            <!-- Brand -->
+            <a href="#" onclick="resetFilters(); return false;" class="group">
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-emerald-400 transition">Minimakers</h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-0.5">Uw 3D-geprinte spullen voor een lage prijs</p>
+            </a>
+
+            <!-- Navigation & Actions -->
+            <div class="flex items-center gap-2.5 sm:gap-3">
+                <button onclick="openAboutModal()" class="bg-[#182936] hover:bg-[#223849] text-slate-200 text-sm font-medium px-4 py-2.5 rounded-lg border border-slate-700/70 transition cursor-pointer">
+                    Over ons
+                </button>
+
+                <button onclick="openCartModal()" class="relative bg-[#182936] hover:bg-[#223849] text-white text-sm font-semibold px-4 py-2.5 rounded-lg border border-slate-700/70 transition flex items-center gap-2 cursor-pointer">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    <span>Winkelmand</span>
+                    <span id="cart-badge" class="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[22px] text-center shadow-sm">0</span>
+                </button>
+
+                <!-- Admin Lock Button -->
+                <button onclick="handleAdminClick()" id="admin-header-btn" title="Eigenaar Beheer (GitHub Studio / Admin)" class="bg-[#182936] hover:bg-[#223849] text-slate-400 hover:text-emerald-400 p-2.5 rounded-lg border border-slate-700/70 transition flex items-center gap-1.5 cursor-pointer">
+                    <svg id="admin-lock-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <span id="admin-btn-label" class="hidden md:inline text-xs font-medium">Beheer</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ADMIN CONTROL BAR (Zichtbaar zodra eigenaar is ingelogd) -->
+    <div id="admin-panel-bar" class="hidden bg-amber-50 border-b-2 border-amber-400 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-amber-500 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">Eigenaar Modus Actief</span>
+                        <h2 class="font-bold text-slate-900 text-base">Minimakers Beheerpaneel</h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1">
+                        Pas direct producten, prijzen of foto's aan. Klaar? Klik op <strong>Exporteer voor GitHub Pages</strong> en upload het gedownloade <code class="bg-amber-100 px-1 rounded">index.html</code> bestand naar jouw GitHub repository. Bezoekers kunnen niets wijzigen!
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <button onclick="openProductEditorModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                        <span>+ Nieuw Product</span>
+                    </button>
+                    <button onclick="exportGitHubHTML()" class="bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <span>Exporteer bijgewerkte index.html</span>
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-white hover:bg-red-50 text-red-600 border border-red-200 text-sm font-medium px-3.5 py-2.5 rounded-lg transition cursor-pointer">
+                        Uitloggen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+        <!-- 3. PROMO BANNER -->
+        <section class="bg-gradient-to-r from-[#00b853] to-[#009e47] rounded-2xl p-6 sm:p-8 text-white shadow-md mb-7 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                    <span>📢</span> Blijf op de hoogte van nieuwe 3D-prints!
+                </h2>
+                <p class="text-emerald-50 text-sm sm:text-base mt-1.5 max-w-2xl">
+                    Word lid van ons WhatsApp-kanaal voor exclusieve updates, nieuwe producten en sneak peeks!
+                </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                <a href="https://whatsapp.com/channel" target="_blank" rel="noopener" class="bg-white hover:bg-emerald-50 text-[#009e47] font-bold text-sm px-5 py-3 rounded-xl shadow-sm transition flex items-center justify-center gap-2 flex-1 sm:flex-initial">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                    Volg het WhatsApp-kanaal
+                </a>
+                <a href="https://youtube.com" target="_blank" rel="noopener" class="bg-[#ff0000] hover:bg-red-700 text-white font-bold text-sm px-5 py-3 rounded-xl shadow-sm transition flex items-center justify-center gap-2 flex-1 sm:flex-initial">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                </a>
+            </div>
+        </section>
+
+        <!-- 4. ZOEK- & FILTERBALK -->
+        <section class="bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200/80 mb-8">
+            <div class="flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-grow">
+                    <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" id="search-input" oninput="renderCatalog()" placeholder="Zoek een 3D-print..." class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+                </div>
+                <div class="sm:w-60">
+                    <select id="category-filter" onchange="renderCatalog()" class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition cursor-pointer">
+                        <option value="all">Alle categorieën</option>
+                        <option value="Feestdagen">🎄 Feestdagen</option>
+                        <option value="Fidgets">🧩 Fidgets</option>
+                        <option value="Handige Tools">🛠️ Handige Tools</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PRODUCTOVERZICHT ('Onze Collectie') -->
+        <section>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">Onze Collectie</h2>
+            <div id="catalog-container" class="space-y-12">
+                <!-- Categorieën en producten worden hier dynamisch gerenderd -->
+            </div>
+            <div id="empty-search-state" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <p class="text-lg font-semibold text-slate-700">Geen 3D-prints gevonden voor je zoekopdracht.</p>
+                <p class="text-sm text-slate-500 mt-1">Probeer een andere zoekterm of kies 'Alle categorieën'.</p>
+                <button onclick="resetFilters()" class="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition cursor-pointer">Toon alle producten</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="bg-[#0c1a24] text-slate-300 mt-16 py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center space-y-2">
+            <p class="text-sm">
+                Vragen of maatwerk? Mail naar <a href="mailto:minimakers3dprint@gmail.com" class="text-emerald-400 hover:underline font-medium">minimakers3dprint@gmail.com</a>
+            </p>
+            <p class="text-xs text-slate-500">
+                © 2026 Minimakers. Alle rechten voorbehouden.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- MODAL A: TOEGEVOEGD AAN WINKELMAND -->
+    <div id="added-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative animate-pop text-center">
+            <button onclick="closeModal('added-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-900">Toegevoegd aan winkelmand!</h3>
+            <p id="added-modal-subtitle" class="text-sm text-slate-500 mt-1.5">Wat wil je nu doen?</p>
+            <div class="grid grid-cols-2 gap-3 mt-6">
+                <button onclick="closeModal('added-modal')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 px-4 rounded-xl text-sm transition cursor-pointer">
+                    Verder winkelen
+                </button>
+                <button onclick="closeModal('added-modal'); openCartModal();" class="bg-[#00b853] hover:bg-[#009e47] text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-sm transition cursor-pointer">
+                    Direct bestellen
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL B: WINKELMAND & BESTELLEN (STAP 1 & STAP 2) -->
+    <div id="cart-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl relative animate-pop max-h-[92vh] overflow-y-auto">
+            <button onclick="closeModal('cart-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+
+            <!-- STAP 1: Controleer je bestelling -->
+            <div id="checkout-step-1">
+                <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Controleer je bestelling</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Controleer en wijzig hier je gekozen artikelen voordat je je gegevens invult.</p>
+
+                <div id="cart-items-list" class="mt-5 divide-y divide-slate-100 border-t border-b border-slate-100 max-h-64 overflow-y-auto pr-1">
+                    <!-- Items worden hier geladen -->
+                </div>
+
+                <div id="cart-empty-msg" class="hidden py-10 text-center text-slate-500 text-sm">
+                    Je winkelmand is nog leeg. Kies eerst een leuke 3D-print uit de collectie!
+                </div>
+
+                <div id="cart-summary-section" class="mt-5 space-y-4">
+                    <!-- Kortingscode -->
+                    <div class="flex gap-2">
+                        <input type="text" id="discount-code-input" placeholder="KORTINGSCODE" class="flex-grow px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <button onclick="applyDiscountCode()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-sm px-4 py-2.5 rounded-xl transition cursor-pointer">
+                            Toepassen
+                        </button>
+                    </div>
+                    <p id="discount-feedback" class="text-xs hidden"></p>
+
+                    <!-- Totaal -->
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <span class="text-base font-bold text-slate-900">Totaalbedrag:</span>
+                        <span id="cart-total-price" class="text-2xl font-extrabold text-[#00b853]">€0,00</span>
+                    </div>
+
+                    <!-- Actieknoppen -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <button onclick="closeModal('cart-modal')" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 px-4 rounded-xl text-sm transition cursor-pointer">
+                            Verder winkelen
+                        </button>
+                        <button onclick="goToCheckoutStep2()" class="bg-[#00b853] hover:bg-[#009e47] text-white font-semibold py-3 px-4 rounded-xl text-sm shadow-sm transition cursor-pointer">
+                            Volgende: Gegevens invullen →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAP 2: Gegevens invullen -->
+            <div id="checkout-step-2" class="hidden">
+                <button onclick="goToCheckoutStep1()" class="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 mb-2 cursor-pointer">
+                    ← Terug naar overzicht
+                </button>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Gegevens invullen</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">Kies eerst hoe je benaderd wilt worden voor de bestelling en het betaalverzoek.</p>
+
+                <form id="order-form" onsubmit="submitOrder(event)" class="mt-5 space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Naam *</label>
+                        <input type="text" id="customer-name" required placeholder="Jouw volledige naam" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Hoe wil je benaderd worden?</label>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button type="button" id="method-whatsapp-btn" onclick="setContactMethod('whatsapp')" class="py-2.5 px-3 rounded-xl text-sm font-semibold border-2 border-[#00b853] bg-emerald-50/70 text-[#009e47] transition cursor-pointer">
+                                Via WhatsApp
+                            </button>
+                            <button type="button" id="method-email-btn" onclick="setContactMethod('email')" class="py-2.5 px-3 rounded-xl text-sm font-semibold border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition cursor-pointer">
+                                Via E-mail
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="contact-input-wrapper">
+                        <label id="contact-input-label" class="block text-xs font-bold text-slate-700 mb-1.5">Telefoonnummer (WhatsApp) *</label>
+                        <input type="tel" id="customer-contact" required placeholder="06 12345678" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Bezorging of Ophalen (optioneel)</label>
+                        <select id="delivery-option" class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="Eigen bezorging (IJmuiden/Driehuis/Velserbroek/Santpoort-Noord)">Eigen bezorging (IJmuiden & omgeving)</option>
+                            <option value="Verzending via post (vanaf € 3,95)">Verzending via post (vanaf € 3,95)</option>
+                            <option value="Ophalen in overleg">Ophalen in overleg</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#00b853] hover:bg-[#009e47] text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-md transition mt-2 cursor-pointer">
+                        Verstuur Bestelling
+                    </button>
+                </form>
+            </div>
+
+            <!-- STAP 3: Bestelbevestiging -->
+            <div id="checkout-step-3" class="hidden text-center py-4">
+                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">Bedankt voor je bestelling!</h3>
+                <p class="text-sm text-slate-600 mt-2">We hebben je aanvraag klaargezet. Klik hieronder om je bestelling direct te verzenden zodat we aan de slag kunnen met 3D-printen!</p>
+                <div id="order-summary-box" class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-4 text-left text-xs text-slate-700 whitespace-pre-line font-mono max-h-48 overflow-y-auto"></div>
+                <div class="mt-5 flex flex-col gap-2.5">
+                    <a id="direct-send-link" href="#" target="_blank" rel="noopener" class="w-full bg-[#00b853] hover:bg-[#009e47] text-white font-bold py-3 px-4 rounded-xl text-sm shadow-sm transition inline-block">
+                        Direct versturen
+                    </a>
+                    <button onclick="finishOrderAndReset()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 px-4 rounded-xl text-sm transition cursor-pointer">
+                        Sluiten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL C: OVER ONS -->
+    <div id="about-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative animate-pop">
+            <button onclick="closeModal('about-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="text-xl font-extrabold text-slate-900">Over Minimakers</h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                Welkom bij <strong>Minimakers</strong>! Wij maken toffe, handige en betaalbare 3D-geprinte spullen voor jong en oud. Van verslavende fidgets tot feestelijke decoratie en slimme huishoudelijke gadgets.
+            </p>
+            <div class="mt-4 bg-emerald-50 border border-emerald-100 rounded-xl p-3.5 text-xs text-emerald-900 space-y-1.5">
+                <p>🌱 <strong>Milieuvriendelijk PLA:</strong> Al onze prints worden gemaakt van biologisch afbreekbaar PLA-plastic.</p>
+                <p>🚚 <strong>Snelle levering:</strong> Eigen bezorging in IJmuiden, Driehuis, Velserbroek & Santpoort-Noord, of verzending door heel Nederland vanaf € 3,95.</p>
+            </div>
+            <button onclick="closeModal('about-modal')" class="mt-5 w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 rounded-xl text-sm transition cursor-pointer">
+                Sluiten
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL D: ADMIN LOGIN (WACHTWOORD) -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl relative animate-pop">
+            <button onclick="closeModal('admin-login-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="w-12 h-12 bg-slate-100 text-slate-800 rounded-xl flex items-center justify-center mb-3">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900">Eigenaar Inloggen</h3>
+            <p class="text-xs text-slate-500 mt-1">Alleen de beheerder kan producten en prijzen aanpassen.</p>
+            <form onsubmit="verifyAdminPassword(event)" class="mt-4 space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Beheerderswachtwoord</label>
+                    <input type="password" id="admin-password-input" required placeholder="Voer wachtwoord in..." class="w-full px-3.5 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <p class="text-[11px] text-slate-400 mt-1">Standaard wachtwoord: <code class="bg-slate-100 px-1 rounded text-slate-600">admin123</code></p>
+                </div>
+                <p id="admin-login-error" class="hidden text-xs text-red-600 font-medium">Onjuist wachtwoord. Probeer het opnieuw.</p>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-sm transition cursor-pointer">
+                    Ontgrendel Beheer
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL E: PRODUCT TOEVOEGEN / BEWERKEN (ADMIN) -->
+    <div id="product-editor-modal" class="hidden fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative animate-pop max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('product-editor-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 id="editor-modal-title" class="text-xl font-extrabold text-slate-900">Product Bewerken</h3>
+            <form id="product-editor-form" onsubmit="saveProductFromEditor(event)" class="mt-4 space-y-3.5">
+                <input type="hidden" id="edit-prod-id">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Productnaam *</label>
+                        <input type="text" id="edit-prod-name" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Categorie *</label>
+                        <select id="edit-prod-category" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white">
+                            <option value="Feestdagen">Feestdagen</option>
+                            <option value="Fidgets">Fidgets</option>
+                            <option value="Handige Tools">Handige Tools</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Prijs in euro (bijv. 2.50) *</label>
+                        <input type="number" step="0.01" min="0" id="edit-prod-price" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Aangepaste prijslabel (optioneel)</label>
+                        <input type="text" id="edit-prod-priceLabel" placeholder="Bijv. 3 voor €2,00" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Korte beschrijving *</label>
+                    <textarea id="edit-prod-desc" rows="2" required class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Afbeelding URL (plak link naar foto, of laat leeg voor illustratie)</label>
+                    <input type="url" id="edit-prod-image" placeholder="https://..." class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Badge rechtsboven (optioneel)</label>
+                        <input type="text" id="edit-prod-badge" placeholder="Bijv. Populair! of Nieuw" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div class="flex items-center pt-5">
+                        <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+                            <input type="checkbox" id="edit-prod-dualColor" class="w-4 h-4 rounded text-emerald-600">
+                            <span>2 kleurkeuzes (Hoofd- & Accentkleur)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                    <button type="button" onclick="closeModal('product-editor-modal')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2.5 rounded-xl text-sm cursor-pointer">Annuleren</button>
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-sm cursor-pointer">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIE -->
+    <div id="toast-notification" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center gap-2.5 animate-pop">
+        <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full"></span>
+        <span id="toast-message">Melding</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGICA ==================== -->
+    <script id="minimakers-data-script">
+        // =========================================================================
+        // 1. CONFIGURATIE & PRODUCTDATA (Wordt automatisch bijgewerkt bij export)
+        // =========================================================================
+        // Tip voor eigenaar: Verander hieronder 'admin123' naar je eigen geheime wachtwoord!
+        const ADMIN_PASSWORD = "admin123";
+        const WHATSAPP_PHONE = "31612345678"; // Vul hier evt. je eigen 06-nummer in (zonder +)
+        const CONTACT_EMAIL = "minimakers3dprint@gmail.com";
+
+        const FILAMENT_COLORS = [
+            "Zwart", "Wit", "Rood", "Lichtgroen", "Oranje",
+            "Donkerblauw", "Lichtblauw", "Roze", "Bruin"
+        ];
+
+        const CATEGORY_META = {
+            "Feestdagen": { icon: "🎄", title: "Feestdagen" },
+            "Fidgets": { icon: "🧩", title: "Fidgets" },
+            "Handige Tools": { icon: "🛠️", title: "Handige Tools" }
+        };
+
+        // STANDAARD PRODUCTEN UIT DE VIDEO
+        let PRODUCTS = [
+            // --- FEESTDAGEN ---
+            { id: "p1", category: "Feestdagen", name: "Sinterklaas Bowl", price: 5.00, priceLabel: "", desc: "Sfeervolle kom in Sinterklaas-sfeer voor al je snoepgoed.", image: "", emoji: "🥣", bg: "#7f1d1d", badge: "", dualColor: false },
+            { id: "p2", category: "Feestdagen", name: "Sint en Piet", price: 2.50, priceLabel: "", desc: "Leuke 3D-geprinte decoratie van Sint en Piet.", image: "", emoji: "🎅", bg: "#991b1b", badge: "", dualColor: false },
+            { id: "p3", category: "Feestdagen", name: "Sint Set", price: 5.00, priceLabel: "", desc: "Complete set in Sinterklaasthema voor de feestdagen.", image: "", emoji: "🎁", bg: "#b45309", badge: "", dualColor: false },
+            { id: "p4", category: "Feestdagen", name: "Christmas Dinner Set", price: 2.00, priceLabel: "", desc: "Je krijgt ze allebei: de servetring en het bestekhoudertje!", image: "", emoji: "🍽️", bg: "#14532d", badge: "", dualColor: false },
+            { id: "p5", category: "Feestdagen", name: "Christmas Hexagon", price: 1.50, priceLabel: "", desc: "Kerst-editie van de populaire hexagon fidget.", image: "", emoji: "❄️", bg: "#166534", badge: "", dualColor: false },
+            { id: "p6", category: "Feestdagen", name: "Christmas Tree", price: 2.50, priceLabel: "", desc: "Prachtige 3D-geprinte kerstboom voor op tafel of in de kast.", image: "", emoji: "🎄", bg: "#065f46", badge: "", dualColor: false },
+            { id: "p7", category: "Feestdagen", name: "Slinky Christmas Fidget", price: 2.50, priceLabel: "", desc: "Flexibele kerst-slinky waar je heerlijk mee kunt bewegen.", image: "", emoji: "🎅", bg: "#991b1b", badge: "", dualColor: false },
+            { id: "p8", category: "Feestdagen", name: "Snowflake Spinner", price: 2.50, priceLabel: "", desc: "Sneeuwvlok vormige spinner voor de winterdagen.", image: "", emoji: "❄️", bg: "#1e3a8a", badge: "", dualColor: false },
+            { id: "p9", category: "Feestdagen", name: "Hexagon Christmas Tree", price: 2.50, priceLabel: "", desc: "Unieke kerstboom opgebouwd uit zeshoekige patronen.", image: "", emoji: "🌲", bg: "#15803d", badge: "", dualColor: false },
+            { id: "p10", category: "Feestdagen", name: "Kerstbal", price: 2.00, priceLabel: "3 voor €2,00", desc: "Lichtgewicht onbreekbare 3D-geprinte kerstbal voor in de boom.", image: "", emoji: "🔮", bg: "#475569", badge: "", dualColor: false },
+
+            // --- FIDGETS ---
+            { id: "p11", category: "Fidgets", name: "Multiclicker", price: 2.50, priceLabel: "", desc: "Heerlijke fidget switch met een bevredigende klik.", image: "", emoji: "🔘", bg: "#334155", badge: "Populair!", dualColor: false },
+            { id: "p12", category: "Fidgets", name: "Bobatea Switch", price: 2.50, priceLabel: "", desc: "Leuke boba-thee vormige fidget switch voor onderweg.", image: "", emoji: "🧋", bg: "#9d174d", badge: "", dualColor: false },
+            { id: "p13", category: "Fidgets", name: "Schakelfidget", price: 2.50, priceLabel: "", desc: "Handige schakelaar fidget met een fijne weerstand.", image: "", emoji: "🕹️", bg: "#1e293b", badge: "", dualColor: false },
+            { id: "p14", category: "Fidgets", name: "Joy Fidget", price: 1.50, priceLabel: "", desc: "Compacte fidget toy in twee kleuren te personaliseren.", image: "", emoji: "🎮", bg: "#dc2626", badge: "", dualColor: true },
+            { id: "p15", category: "Fidgets", name: "Spiraal Fidget", price: 2.50, priceLabel: "", desc: "Unieke draaibare spiraal die lekker in de hand ligt.", image: "", emoji: "🌀", bg: "#0f766e", badge: "", dualColor: true },
+            { id: "p16", category: "Fidgets", name: "Hexagon Fidget", price: 2.50, priceLabel: "", desc: "Zeshoekige fidget om eindeloos mee te spelen.", image: "", emoji: "⬡", bg: "#4f46e5", badge: "", dualColor: false },
+            { id: "p17", category: "Fidgets", name: "Vlieginator", price: 2.50, priceLabel: "", desc: "Stoere draaiende fidget met een uniek ontwerp.", image: "", emoji: "🚁", bg: "#0369a1", badge: "", dualColor: false },
+            { id: "p18", category: "Fidgets", name: "Infinity Cube", price: 2.00, priceLabel: "", desc: "Klassieke oneindig omklapbare kubus voor ultieme ontspanning.", image: "", emoji: "🧊", bg: "#047857", badge: "", dualColor: false },
+            { id: "p19", category: "Fidgets", name: "Infinity Ball", price: 2.50, priceLabel: "", desc: "Vloeiend draaiende bal met een rustgevende werking.", image: "", emoji: "🔮", bg: "#1d4ed8", badge: "", dualColor: false },
+
+            // --- HANDIGE TOOLS ---
+            { id: "p20", category: "Handige Tools", name: "Chopstick Helper", price: 1.50, priceLabel: "", desc: "Eenvoudig leren eten met eetstokjes.", image: "", emoji: "🥢", bg: "#78350f", badge: "", dualColor: false },
+            { id: "p21", category: "Handige Tools", name: "Fruit Washer", price: 7.50, priceLabel: "", desc: "Handig systeem om je fruit grondig te wassen en te laten uitlekken.", image: "", emoji: "🍓", bg: "#059669", badge: "", dualColor: false },
+            { id: "p22", category: "Handige Tools", name: "Egg Separator", price: 2.50, priceLabel: "", desc: "Scheid eigeel en eiwit snel en netjes.", image: "", emoji: "🥚", bg: "#d97706", badge: "", dualColor: false },
+            { id: "p23", category: "Handige Tools", name: "Toilet Paper Holder", price: 5.00, priceLabel: "", desc: "Handige en strakke wc-rolhouder.", image: "", emoji: "🧻", bg: "#475569", badge: "", dualColor: false },
+            { id: "p24", category: "Handige Tools", name: "2 in 1 Organizer", price: 5.00, priceLabel: "", desc: "Dubbele dispenser voor wattenstaafjes en wattenschijfjes.", image: "", emoji: "🗂️", bg: "#334155", badge: "", dualColor: false }
+        ];
+    </script>
+
+    <script>
+        // =========================================================================
+        // 2. APPLICATIE STATE & INITIALISATIE
+        // =========================================================================
+        let cart = JSON.parse(localStorage.getItem('minimakers_cart') || '[]');
+        let discountPercent = 0;
+        let appliedPromoCode = "";
+        let isAdmin = sessionStorage.getItem('minimakers_admin') === 'true';
+        let contactMethod = 'whatsapp';
+
+        // Laad eventuele lokaal opgeslagen wijzigingen van de eigenaar (indien aanwezig)
+        const savedOwnerProducts = localStorage.getItem('minimakers_owner_products');
+        if (savedOwnerProducts) {
+            try {
+                PRODUCTS = JSON.parse(savedOwnerProducts);
+            } catch (e) {
+                console.error("Kon opgeslagen producten niet laden:", e);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateAdminUI();
+            renderCatalog();
+            updateCartBadge();
+        });
+
+        // =========================================================================
+        // 3. PRODUCTCATALOGUS RENDEREN
+        // =========================================================================
+        function formatEuro(amount) {
+            return '€' + Number(amount).toFixed(2).replace('.', ',');
+        }
+
+        function generateProductVisual(prod) {
+            if (prod.image && prod.image.trim() !== "") {
+                return `
+                    <img src="${prod.image}" alt="${prod.name}"
+                         onerror="this.onerror=null; this.parentElement.innerHTML=getFallbackSVG('${prod.emoji || '🧊'}', '${prod.bg || '#0f172a'}', '${prod.name.replace(/'/g, "\\'")}');"
+                         class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                `;
+            }
+            return getFallbackSVG(prod.emoji || '🧊', prod.bg || '#0f172a', prod.name);
+        }
+
+        function getFallbackSVG(emoji, bgColor, title) {
+            return `
+                <div class="w-full h-48 flex flex-col items-center justify-center relative overflow-hidden select-none" style="background: linear-gradient(135deg, ${bgColor} 0%, #0f172a 100%);">
+                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 14px 14px;"></div>
+                    <span class="text-5xl mb-2 drop-shadow-md transform group-hover:scale-110 transition duration-300">${emoji}</span>
+                    <span class="text-[11px] font-semibold uppercase tracking-wider text-white/80 bg-black/25 px-2.5 py-0.5 rounded-full backdrop-blur-xs">${title}</span>
+                </div>
+            `;
+        }
+
+        function renderCatalog() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            const selectedCat = document.getElementById('category-filter').value;
+            const container = document.getElementById('catalog-container');
+            const emptyState = document.getElementById('empty-search-state');
+
+            container.innerHTML = '';
+            let totalVisible = 0;
+
+            const categoriesToShow = selectedCat === 'all'
+                ? Object.keys(CATEGORY_META)
+                : [selectedCat];
+
+            categoriesToShow.forEach(catKey => {
+                const filteredProducts = PRODUCTS.filter(p => {
+                    const matchesCat = p.category === catKey;
+                    const matchesSearch = p.name.toLowerCase().includes(searchQuery) ||
+                                          p.desc.toLowerCase().includes(searchQuery);
+                    return matchesCat && matchesSearch;
+                });
+
+                if (filteredProducts.length === 0) return;
+                totalVisible += filteredProducts.length;
+
+                const meta = CATEGORY_META[catKey] || { icon: "📦", title: catKey };
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'space-y-5';
+
+                sectionEl.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">${meta.icon}</span>
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 whitespace-nowrap">${meta.title}</h3>
+                        <div class="h-0.5 bg-emerald-500/40 flex-grow rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        ${filteredProducts.map(prod => renderProductCard(prod)).join('')}
+                    </div>
+                `;
+
+                container.appendChild(sectionEl);
+            });
+
+            if (totalVisible === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        function renderProductCard(prod) {
+            const displayPrice = prod.priceLabel && prod.priceLabel.trim() !== ""
+                ? prod.priceLabel
+                : formatEuro(prod.price);
+
+            const colorOptionsHTML = FILAMENT_COLORS.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            const colorSelectorsHTML = prod.dualColor
+                ? `
+                    <div class="space-y-2 mt-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">1. Hoofdkleur:</label>
+                            <select id="color1-${prod.id}" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer">
+                                ${colorOptionsHTML}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">2. Accentkleur:</label>
+                            <select id="color2-${prod.id}" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer">
+                                <option value="Wit">Wit</option>
+                                ${FILAMENT_COLORS.filter(c => c !== 'Wit').map(c => `<option value="${c}">${c}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                `
+                : `
+                    <div class="mt-3">
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Kies kleur filament:</label>
+                        <select id="color1-${prod.id}" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs sm:text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer">
+                            ${colorOptionsHTML}
+                        </select>
+                    </div>
+                `;
+
+            const adminControlsHTML = isAdmin
+                ? `
+                    <div class="mt-3 pt-3 border-t border-amber-200 bg-amber-50/70 -mx-5 -mb-5 px-5 py-3 flex items-center justify-between gap-2 rounded-b-2xl">
+                        <button onclick="openProductEditorModal('${prod.id}')" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition cursor-pointer">
+                            ✏️ Bewerken
+                        </button>
+                        <button onclick="deleteProduct('${prod.id}')" class="bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold py-2 px-3 rounded-lg transition cursor-pointer">
+                            🗑️
+                        </button>
+                    </div>
+                `
+                : '';
+
+            return `
+                <article class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200/80 overflow-hidden flex flex-col justify-between transition group">
+                    <div>
+                        <!-- Productfoto / Illustratie -->
+                        <div class="relative overflow-hidden bg-slate-100">
+                            ${generateProductVisual(prod)}
+                            ${prod.badge ? `<span class="absolute top-3 right-3 bg-[#0c1a24] text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md">${prod.badge}</span>` : ''}
+                        </div>
+
+                        <!-- Info -->
+                        <div class="p-5 pb-3">
+                            <h4 class="text-lg font-extrabold text-slate-900 leading-snug">${prod.name}</h4>
+                            <p class="text-lg font-extrabold text-[#00b853] mt-0.5">${displayPrice}</p>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">${prod.desc}</p>
+                            <p class="text-xs font-semibold text-[#009e47] mt-2.5 flex items-center gap-1">
+                                <span>🌱</span> Gemaakt van milieuvriendelijk PLA.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Kleur & Knop -->
+                    <div class="p-5 pt-0">
+                        ${colorSelectorsHTML}
+                        <button onclick="addToCart('${prod.id}')" class="w-full mt-4 bg-[#00b853] hover:bg-[#009e47] active:scale-[0.99] text-white font-bold py-3 px-4 rounded-xl text-sm shadow-sm transition cursor-pointer">
+                            In winkelmand
+                        </button>
+                        ${adminControlsHTML}
+                    </div>
+                </article>
+            `;
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('category-filter').value = 'all';
+            renderCatalog();
+        }
+
+        // =========================================================================
+        // 4. WINKELMAND & BESTELPROCES
+        // =========================================================================
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const color1 = document.getElementById(`color1-${productId}`).value;
+            let chosenColor = color1;
+
+            if (product.dualColor) {
+                const color2 = document.getElementById(`color2-${productId}`).value;
+                chosenColor = `Hoofd: ${color1}, Accent: ${color2}`;
+            }
+
+            const existingIndex = cart.findIndex(item => item.productId === productId && item.color === chosenColor);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    priceLabel: product.priceLabel,
+                    color: chosenColor,
+                    qty: 1
+                });
+            }
+
+            saveCart();
+            updateCartBadge();
+
+            document.getElementById('added-modal-subtitle').textContent = `${product.name} (${chosenColor}) is toegevoegd.`;
+            openModal('added-modal');
+        }
+
+        function saveCart() {
+            localStorage.setItem('minimakers_cart', JSON.stringify(cart));
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const badge = document.getElementById('cart-badge');
+            badge.textContent = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('bg-red-500');
+                badge.classList.add('bg-[#00b853]');
+            } else {
+                badge.classList.remove('bg-[#00b853]');
+                badge.classList.add('bg-red-500');
+            }
+        }
+
+        function openCartModal() {
+            goToCheckoutStep1();
+            renderCartItems();
+            openModal('cart-modal');
+        }
+
+        function renderCartItems() {
+            const listEl = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('cart-empty-msg');
+            const summarySection = document.getElementById('cart-summary-section');
+
+            if (cart.length === 0) {
+                listEl.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+                summarySection.classList.add('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            summarySection.classList.remove('hidden');
+
+            listEl.innerHTML = cart.map((item, idx) => {
+                const unitText = item.priceLabel ? item.priceLabel : `${formatEuro(item.price)} p.st.`;
+                return `
+                    <div class="py-3.5 flex items-center justify-between gap-3">
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">${item.name}</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Kleur: ${item.color} | ${unitText}</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden">
+                                <button onclick="changeItemQty(${idx}, -1)" class="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer">-</button>
+                                <span class="px-2.5 py-1 text-xs font-bold text-slate-800">${item.qty}</span>
+                                <button onclick="changeItemQty(${idx}, 1)" class="px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer">+</button>
+                            </div>
+                            <button onclick="removeCartItem(${idx})" class="text-xs font-semibold text-red-500 hover:text-red-700 ml-1 cursor-pointer">
+                                Verwijder
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateCartTotal();
+        }
+
+        function changeItemQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function applyDiscountCode() {
+            const code = document.getElementById('discount-code-input').value.trim().toUpperCase();
+            const feedback = document.getElementById('discount-feedback');
+            feedback.classList.remove('hidden', 'text-emerald-600', 'text-red-600');
+
+            if (code === 'MINIMAKERS10' || code === 'WELKOM10') {
+                discountPercent = 10;
+                appliedPromoCode = code;
+                feedback.textContent = `✅ Kortingscode '${code}' toegepast (10% korting)!`;
+                feedback.classList.add('text-emerald-600');
+            } else if (code === '') {
+                discountPercent = 0;
+                appliedPromoCode = '';
+                feedback.classList.add('hidden');
+            } else {
+                discountPercent = 0;
+                appliedPromoCode = '';
+                feedback.textContent = `❌ Ongeldige kortingscode. Probeer bijv. MINIMAKERS10.`;
+                feedback.classList.add('text-red-600');
+            }
+            updateCartTotal();
+        }
+
+        function calculateTotalAmount() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmount = subtotal * (discountPercent / 100);
+            return Math.max(0, subtotal - discountAmount);
+        }
+
+        function updateCartTotal() {
+            const total = calculateTotalAmount();
+            document.getElementById('cart-total-price').textContent = formatEuro(total);
+        }
+
+        function goToCheckoutStep1() {
+            document.getElementById('checkout-step-1').classList.remove('hidden');
+            document.getElementById('checkout-step-2').classList.add('hidden');
+            document.getElementById('checkout-step-3').classList.add('hidden');
+        }
+
+        function goToCheckoutStep2() {
+            if (cart.length === 0) return;
+            document.getElementById('checkout-step-1').classList.add('hidden');
+            document.getElementById('checkout-step-2').classList.remove('hidden');
+            document.getElementById('checkout-step-3').classList.add('hidden');
+        }
+
+        function setContactMethod(method) {
+            contactMethod = method;
+            const waBtn = document.getElementById('method-whatsapp-btn');
+            const emBtn = document.getElementById('method-email-btn');
+            const label = document.getElementById('contact-input-label');
+            const input = document.getElementById('customer-contact');
+
+            if (method === 'whatsapp') {
+                waBtn.className = "py-2.5 px-3 rounded-xl text-sm font-semibold border-2 border-[#00b853] bg-emerald-50/70 text-[#009e47] transition cursor-pointer";
+                emBtn.className = "py-2.5 px-3 rounded-xl text-sm font-semibold border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition cursor-pointer";
+                label.textContent = "Telefoonnummer (WhatsApp) *";
+                input.type = "tel";
+                input.placeholder = "06 12345678";
+            } else {
+                emBtn.className = "py-2.5 px-3 rounded-xl text-sm font-semibold border-2 border-[#00b853] bg-emerald-50/70 text-[#009e47] transition cursor-pointer";
+                waBtn.className = "py-2.5 px-3 rounded-xl text-sm font-semibold border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition cursor-pointer";
+                label.textContent = "E-mailadres *";
+                input.type = "email";
+                input.placeholder = "naam@voorbeeld.nl";
+            }
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            const name = document.getElementById('customer-name').value.trim();
+            const contact = document.getElementById('customer-contact').value.trim();
+            const delivery = document.getElementById('delivery-option').value;
+            const totalStr = formatEuro(calculateTotalAmount());
+
+            const lines = cart.map(i => `• ${i.qty}x ${i.name} (${i.color}) - ${formatEuro(i.price * i.qty)}`).join('\n');
+            const discountLine = appliedPromoCode ? `\nKortingscode: ${appliedPromoCode} (-${discountPercent}%)` : '';
+
+            const orderText =
+`Nieuwe bestelling bij Minimakers! 🖨️
+Naam: ${name}
+Contact (${contactMethod === 'whatsapp' ? 'WhatsApp' : 'E-mail'}): ${contact}
+Levering: ${delivery}
+
+Bestelde 3D-prints:
+${lines}${discountLine}
+
+Totaalbedrag: ${totalStr}`;
+
+            document.getElementById('order-summary-box').textContent = orderText;
+
+            const directLink = document.getElementById('direct-send-link');
+            if (contactMethod === 'whatsapp') {
+                directLink.href = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(orderText)}`;
+                directLink.textContent = "Verstuur via WhatsApp";
+            } else {
+                directLink.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Nieuwe bestelling Minimakers - ' + name)}&body=${encodeURIComponent(orderText)}`;
+                directLink.textContent = "Verstuur via E-mail";
+            }
+
+            document.getElementById('checkout-step-2').classList.add('hidden');
+            document.getElementById('checkout-step-3').classList.remove('hidden');
+        }
+
+        function finishOrderAndReset() {
+            cart = [];
+            discountPercent = 0;
+            appliedPromoCode = "";
+            saveCart();
+            updateCartBadge();
+            closeModal('cart-modal');
+            showToast("Bestelling afgerond! Winkelmand is geleegd.");
+        }
+
+        // =========================================================================
+        // 5. BEHEERDERSPANEEL (ALLEEN EIGENAAR) & GITHUB EXPORT
+        // =========================================================================
+        function handleAdminClick() {
+            if (isAdmin) {
+                const bar = document.getElementById('admin-panel-bar');
+                bar.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('admin-password-input').value = '';
+                document.getElementById('admin-login-error').classList.add('hidden');
+                openModal('admin-login-modal');
+            }
+        }
+
+        function verifyAdminPassword(event) {
+            event.preventDefault();
+            const entered = document.getElementById('admin-password-input').value;
+            if (entered === ADMIN_PASSWORD) {
+                isAdmin = true;
+                sessionStorage.setItem('minimakers_admin', 'true');
+                closeModal('admin-login-modal');
+                updateAdminUI();
+                renderCatalog();
+                showToast("Welkom terug! Beheermodus is geactiveerd.");
+            } else {
+                document.getElementById('admin-login-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            sessionStorage.removeItem('minimakers_admin');
+            updateAdminUI();
+            renderCatalog();
+            showToast("Uitgelogd uit beheermodus.");
+        }
+
+        function updateAdminUI() {
+            const bar = document.getElementById('admin-panel-bar');
+            const label = document.getElementById('admin-btn-label');
+            const btn = document.getElementById('admin-header-btn');
+
+            if (isAdmin) {
+                bar.classList.remove('hidden');
+                label.textContent = "Beheer (Actief)";
+                btn.classList.add('border-amber-400', 'text-amber-400');
+            } else {
+                bar.classList.add('hidden');
+                label.textContent = "Beheer";
+                btn.classList.remove('border-amber-400', 'text-amber-400');
+            }
+        }
+
+        function openProductEditorModal(productId = null) {
+            const form = document.getElementById('product-editor-form');
+            form.reset();
+
+            if (productId) {
+                const prod = PRODUCTS.find(p => p.id === productId);
+                if (!prod) return;
+                document.getElementById('editor-modal-title').textContent = "Product Bewerken";
+                document.getElementById('edit-prod-id').value = prod.id;
+                document.getElementById('edit-prod-name').value = prod.name;
+                document.getElementById('edit-prod-category').value = prod.category;
+                document.getElementById('edit-prod-price').value = prod.price;
+                document.getElementById('edit-prod-priceLabel').value = prod.priceLabel || "";
+                document.getElementById('edit-prod-desc').value = prod.desc;
+                document.getElementById('edit-prod-image').value = prod.image || "";
+                document.getElementById('edit-prod-badge').value = prod.badge || "";
+                document.getElementById('edit-prod-dualColor').checked = !!prod.dualColor;
+            } else {
+                document.getElementById('editor-modal-title').textContent = "Nieuw Product Toevoegen";
+                document.getElementById('edit-prod-id').value = "";
+            }
+
+            openModal('product-editor-modal');
+        }
+
+        function saveProductFromEditor(event) {
+            event.preventDefault();
+            const id = document.getElementById('edit-prod-id').value;
+            const name = document.getElementById('edit-prod-name').value.trim();
+            const category = document.getElementById('edit-prod-category').value;
+            const price = parseFloat(document.getElementById('edit-prod-price').value);
+            const priceLabel = document.getElementById('edit-prod-priceLabel').value.trim();
+            const desc = document.getElementById('edit-prod-desc').value.trim();
+            const image = document.getElementById('edit-prod-image').value.trim();
+            const badge = document.getElementById('edit-prod-badge').value.trim();
+            const dualColor = document.getElementById('edit-prod-dualColor').checked;
+
+            if (id) {
+                const idx = PRODUCTS.findIndex(p => p.id === id);
+                if (idx > -1) {
+                    PRODUCTS[idx] = { ...PRODUCTS[idx], name, category, price, priceLabel, desc, image, badge, dualColor };
+                }
+                showToast(`'${name}' is bijgewerkt!`);
+            } else {
+                const newProd = {
+                    id: 'p' + Date.now(),
+                    category,
+                    name,
+                    price,
+                    priceLabel,
+                    desc,
+                    image,
+                    emoji: "🧊",
+                    bg: "#0f766e",
+                    badge,
+                    dualColor
+                };
+                PRODUCTS.push(newProd);
+                showToast(`'${name}' is toegevoegd aan de collectie!`);
+            }
+
+            localStorage.setItem('minimakers_owner_products', JSON.stringify(PRODUCTS));
+            closeModal('product-editor-modal');
+            renderCatalog();
+        }
+
+        function deleteProduct(productId) {
+            const prod = PRODUCTS.find(p => p.id === productId);
+            if (!prod) return;
+            PRODUCTS = PRODUCTS.filter(p => p.id !== productId);
+            localStorage.setItem('minimakers_owner_products', JSON.stringify(PRODUCTS));
+            renderCatalog();
+            showToast(`'${prod.name}' is verwijderd.`);
+        }
+
+        // Exporteer een kant-en-klaar index.html bestand voor GitHub Pages
+        function exportGitHubHTML() {
+            const docClone = document.documentElement.cloneNode(true);
+
+            // Zorg dat de geëxporteerde pagina altijd schoon start (niet ingelogd als admin voor bezoekers)
+            const adminBar = docClone.querySelector('#admin-panel-bar');
+            if (adminBar) adminBar.classList.add('hidden');
+            const adminLabel = docClone.querySelector('#admin-btn-label');
+            if (adminLabel) adminLabel.textContent = 'Beheer';
+
+            // Schrijf de bijgewerkte PRODUCTS array hard in het data-script van het bestand
+            const dataScript = docClone.querySelector('#minimakers-data-script');
+            if (dataScript) {
+                const updatedProductsJSON = JSON.stringify(PRODUCTS, null, 12);
+                dataScript.textContent = dataScript.textContent.replace(
+                    /let PRODUCTS = \[[\s\S]*?\];/,
+                    `let PRODUCTS = ${updatedProductsJSON};`
+                );
+            }
+
+            const finalHTML = "<!DOCTYPE html>\n" + docClone.outerHTML;
+            const blob = new Blob([finalHTML], { type: "text/html;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+
+            const downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.download = "index.html";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(url);
+
+            showToast("✅ Bijgewerkte index.html gedownload voor GitHub Pages!");
+        }
+
+        // =========================================================================
+        // 6. HULPFUNCTIES VOOR MODALS & MELDINGEN
+        // =========================================================================
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function openAboutModal() {
+            openModal('about-modal');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
